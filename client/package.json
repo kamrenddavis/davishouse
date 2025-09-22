@@ -1,0 +1,27 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "Davis House Sports React Frontend",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamrenddavis/davishouse.git"
+  },
+  "author": "kamrenddavis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kamrenddavis/davishouse/issues"
+  },
+  "homepage": "https://github.com/kamrenddavis/davishouse#readme",
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  }
+}
