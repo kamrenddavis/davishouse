@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 html {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Noto+Sans", sans-serif;
 }
 body {
   background: #eee;
@@ -12,7 +12,7 @@ body {
 }
 
 header {
-  background-color: #f5ba13;
+  background-color: #7075ea;
   margin: auto -16px;
   padding: 16px 32px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
@@ -20,8 +20,8 @@ header {
 
 header h1 {
   color: #fff;
-  font-family: "McLaren", cursive;
-  font-weight: 200;
+  font-family: "Noto+Sans", sans-serif;
+  font-weight: 800;
 }
 
 footer {
