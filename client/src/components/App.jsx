@@ -13,10 +13,10 @@ export default function App() {
     console.log();
   }
 
-  useEffect(() => {
+  /*useEffect(() => {
     fetchAPI();
   
-  }, {});
+  }, {});*/
 
   return (
     <div>

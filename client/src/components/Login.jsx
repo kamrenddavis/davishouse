@@ -1,26 +1,53 @@
 import React, { useState } from 'react';
-import Password from "./login/Password";
-import Username from "./login/Username";
-import Submit from "./login/Submit";
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 
 export default function Login() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [user, setUser] = useState({
+        username: "",
+        password: ""
+    });
 
-    const handleSubmit = (event) => {
+    function handleSubmit(event) {
+
         event.preventDefault();
-        console.log('Login attempted with:', { email, password });
-        // Here you would typically send a request to your server
-    };
+        console.log('Login attempted with:', {user});
+    }
+
+    function handleChange(event) {
+        const { name, value } = event.target;
+
+        setUser(prevValue => {
+        if (name === "username") {
+            return {
+            username: value,
+            password: prevValue.password
+            };
+        } else if (name === "password") {
+            return {
+            username: user.username,
+            password: value
+            };
+        }
+        });
+    }
 
     return (
-        <Form onSubmit={handleSubmit}>
-            <div class="container">
-                <Username />
-                <Password />
-                <Submit />
-            </div>
-        </Form>
+        <div className="container">
+            <Form onSubmit={handleSubmit}>
+                <input
+                    onChange={handleChange}
+                    value={user.username}
+                    name="username"
+                    placeholder="Username/email"
+                />
+                <input
+                    onChange={handleChange}
+                    value={user.password}
+                    name="password"
+                    placeholder="Password"
+                />
+                <button>Submit</button>
+            </Form>
+        </div>
     );
 }
