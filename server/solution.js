@@ -7,6 +7,11 @@ import { Strategy } from "passport-local";
 import GoogleStrategy from "passport-google-oauth2";
 import session from "express-session";
 import env from "dotenv";
+import cors from "cors";
+
+const corsOptions = {
+  origin: ["https://localhost:5173"],
+}
 
 const app = express();
 const port = 3000;

@@ -5,11 +5,11 @@ import "../../public/styles.css";
 import axios from "axios";
 import Login from "./Login";
 
-const port = 3000;
+const serverPort = 3000;
 
 export default function App() {
   const fetchAPI = async () => {
-    const response = await axios.get("http://localhost:" + {port} + "/api");
+    const response = await axios.get("http://localhost:" + {Port} + "/api");
     console.log();
   }
 
