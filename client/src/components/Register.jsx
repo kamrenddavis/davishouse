@@ -6,12 +6,13 @@ import * as constClass from "../utils/Constants";
 import { AuthContext } from '../contexts/AuthContext';
 import googleIcon from '../assets/Google_G_logo.svg.webp';
 
-export default function Login() {
+export default function Register() {
     const navigate = useNavigate();
     const [error, setError] = useState("");
     const { setUser } = useContext(AuthContext);
 
     const [formData, setFormData] = useState({
+        email: "",
         username: "",
         password: ""
     });
@@ -26,7 +27,7 @@ export default function Login() {
         event.preventDefault();
         setError("");
 
-        axios.post(`${constClass.SERVER_API_URL}/api/login`, formData, {
+        axios.post(`${constClass.SERVER_API_URL}/api/register`, formData, {
             withCredentials: true
         })
         .then((response) => {
@@ -34,58 +35,62 @@ export default function Login() {
             navigate('/home');
         })
         .catch((err) => {
-            const serverMessage = err.response?.data?.message;
-            setError(serverMessage || "Invalid username or password.");
+            const message = err.response?.data?.message || "Registration failed. Email or Username may be taken.";
+            setError(message);
         });
     }
 
     const handleGoogleLogin = () => {
-        //window.location.href = `https://api.davishousesports.com/auth/google`;
-        window.location.href = `http://localhost:3000/auth/google`;
+        window.location.href = `https://api.davishousesports.com/auth/google`;
     };
 
     return (
-        /* py-4 py-md-5 gives it breathing room at the top and bottom on all devices */
         <Container className="py-4 py-md-5">
             <Row className="justify-content-center">
-                {/* xs=12 makes it full width on mobile, md=6/lg=4 centers it on desktop */}
                 <Col xs={12} sm={10} md={6} lg={5} xl={4}>
-                    
-                    {/* border-0 and shadow create a cleaner look than the default card */}
                     <Card className="shadow border-0 rounded-4">
                         <Card.Body className="p-4 p-sm-5">
                             <div className="text-center mb-4">
-                                <h2 className="fw-bold">Login</h2>
-                                <p className="text-muted small">Welcome back to Davis House Sports</p>
+                                <h2 className="fw-bold">Create Account</h2>
+                                <p className="text-muted small">Join Davis House Sports today</p>
                             </div>
-                            
+
                             <Form onSubmit={handleSubmit}>
-                                <Form.Group className='mb-3' controlId="formEmail">
+                                <Form.Group className='mb-3' controlId='formEmail'>
                                     <Form.Label className="small fw-semibold">Email Address</Form.Label>
                                     <Form.Control
                                         onChange={handleChange}
-                                        value={formData.username}
-                                        name="username"
-                                        placeholder="Enter your email"
-                                        type="text"
-                                        size="lg" // Larger input for easier mobile typing
+                                        value={formData.email}
+                                        name="email"
+                                        placeholder="your@email.com"
+                                        type="email"
+                                        size="lg"
                                         className="bg-light border-0"
                                         required
                                     />
                                 </Form.Group>
 
-                                <Form.Group className='mb-2' controlId="formPassword">
-                                    <div className="d-flex justify-content-between align-items-center">
-                                        <Form.Label className="small fw-semibold">Password</Form.Label>
-                                        <Link to="/forgot-password" size="sm" className="text-decoration-none x-small mb-2">
-                                            Forgot?
-                                        </Link>
-                                    </div>
+                                <Form.Group className='mb-3' controlId='formUsername'>
+                                    <Form.Label className="small fw-semibold">Username</Form.Label>
+                                    <Form.Control
+                                        onChange={handleChange}
+                                        value={formData.username}
+                                        name="username"
+                                        placeholder="Choose a display name"
+                                        type="text"
+                                        size="lg"
+                                        className="bg-light border-0"
+                                        required
+                                    />
+                                </Form.Group>
+                                
+                                <Form.Group className='mb-4' controlId='formPassword'>
+                                    <Form.Label className="small fw-semibold">Password</Form.Label>
                                     <Form.Control
                                         onChange={handleChange}
                                         value={formData.password}
                                         name="password"
-                                        placeholder="Enter password"
+                                        placeholder="Create a password"
                                         type="password"
                                         size="lg"
                                         className="bg-light border-0"
@@ -94,25 +99,25 @@ export default function Login() {
                                 </Form.Group>
 
                                 {error && (
-                                    <Alert variant="danger" className="py-2 small border-0 mt-3">
+                                    <Alert variant="danger" className="py-2 small border-0 mb-4">
                                         {error}
                                     </Alert>
                                 )}
 
-                                <Button variant='primary' type="submit" size="lg" className="w-100 mt-4 py-3 fw-bold shadow-sm">
-                                    Sign In
+                                <Button variant='primary' type="submit" size="lg" className="w-100 py-3 fw-bold shadow-sm">
+                                    Register Now
                                 </Button>
                             </Form>
 
                             <div className="text-center mt-4">
                                 <p className="small text-muted mb-4">
-                                    New here? <Link to="/register" className="fw-bold text-decoration-none">Create an account</Link>
+                                    Already have an account? <Link to="/login" className="fw-bold text-decoration-none">Login here</Link>
                                 </p>
                                 
                                 <div className="d-flex align-items-center mb-4">
-                                    <hr className="flex-grow-1" />
+                                    <hr className="flex-grow-1 opacity-25" />
                                     <span className="mx-3 text-muted x-small fw-bold">OR</span>
-                                    <hr className="flex-grow-1" />
+                                    <hr className="flex-grow-1 opacity-25" />
                                 </div>
 
                                 <Button 
@@ -126,14 +131,14 @@ export default function Login() {
                                         alt="Google logo" 
                                         style={{ width: '20px', marginRight: '12px' }} 
                                     />
-                                    <span className="small fw-semibold">Continue with Google</span>
+                                    <span className="small fw-semibold">Sign up with Google</span>
                                 </Button>
                             </div>
                         </Card.Body>
                     </Card>
-
+                    
                     <p className="text-center mt-4 text-white-50 x-small">
-                        By logging in, you agree to our Terms of Service.
+                        By registering, you confirm you are of legal gambling age.
                     </p>
                 </Col>
             </Row>

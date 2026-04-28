@@ -1,10 +1,14 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import '../public/styles.css'
 import App from './components/App.jsx'
+import { BrowserRouter } from 'react-router-dom';
+import '../public/styles.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </StrictMode>,
 )
